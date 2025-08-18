@@ -1,15 +1,22 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, Image, TextInput } from "react-native";
 import { Style } from "./styles";
+import Logo from "../../assets/logo.png";
 
 export default function login() {
     return (
         <View style={Style.container}>
             <View style={Style.boxTop}>
-                <Text>Top</Text>
+                <Image
+                source={Logo}
+                />
+                <Text>Bem vindo de volta!</Text>
             </View>
             <View style={Style.boxMid}>
-                <Text>Mid</Text>
+                <Text>Endereço de E-mail</Text>
+                <TextInput />
+                <Text>Senha</Text>
+                <TextInput />
             </View>
             <View style={Style.boxBottom}>
                 <Text>Bottom</Text>
