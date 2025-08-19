@@ -7,25 +7,24 @@ export const Style = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        // padding: 20,
     },
 
     boxTop: {
         height: Dimensions.get('window').height / 3,
         width: '100%',
-        backgroundColor: 'red',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     boxMid: {
         height: Dimensions.get('window').height / 4,
         width: '100%',
-        backgroundColor: 'green',
+        paddingHorizontal: 37,
     },
 
     boxBottom: {
         height: Dimensions.get('window').height / 3,
         width: '100%',
-        backgroundColor: 'blue',
     },
 
     logo: {
@@ -52,11 +51,15 @@ export const Style = StyleSheet.create({
         borderRadius: 40,
         marginTop: 10,
         flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 5,
+        backgroundColor: themas.colors.lightGray,
+        borderColor: themas.colors.lightGray,
     },
 
     input: {
         height: '100%',
-        width: '100%',
-        backgroundColor: 'red',
+        width: '90%',
+        borderRadius: 40,
     }
 })
