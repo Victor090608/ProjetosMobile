@@ -1,11 +1,38 @@
-import React from "react";
-import { Text, View, Image, TextInput, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+
+
+import { Text, View, Image, TextInput, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import { Style } from "./styles";
 import Logo from "../../assets/logo.png";
 import { MaterialIcons } from '@expo/vector-icons';
 import { themas } from '../../global/themes';
 
-export default function login() {
+
+
+export default function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    async function getLogin() {
+        try {
+            setLoading(true)
+            if (!email || !password) {
+                return Alert.alert('Atenção', 'Informe os campos obrigatórios!');
+            }
+            setTimeout(() => {
+                if (email == 'vvbarcellos11@gmail.com' && password == '12345678') {
+                    Alert.alert('Logado com sucesso!');
+                } else {
+                    Alert.alert('Usuário não encontrado.');
+                }
+                setLoading(false)
+            }, 3000)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <View style={Style.container}>
             <View style={Style.boxTop}>
@@ -21,6 +48,8 @@ export default function login() {
                 <View style={Style.boxInput}>
                     <TextInput
                         style={Style.input}
+                        value={email}
+                        onChangeText={setEmail}
                     />
                     <MaterialIcons
                         name="email"
@@ -33,6 +62,9 @@ export default function login() {
                 <View style={Style.boxInput}>
                     <TextInput
                         style={Style.input}
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
                     />
                     <MaterialIcons
                         name="remove-red-eye"
@@ -42,11 +74,14 @@ export default function login() {
                 </View>
             </View>
             <View style={Style.boxBottom}>
-                <TouchableOpacity style={Style.button}>
-                    <Text style={Style.textButton}>Entrar</Text>
+                <TouchableOpacity style={Style.button} onPress={() => getLogin()}>
+                    {
+                        loading ? <ActivityIndicator color={'#ffff'} size={"small"}/> : 
+                        <Text style={Style.textButton}>Entrar</Text>
+                    }
                 </TouchableOpacity>
             </View>
-            <Text style={Style.textBottom}>Não tem conta? <Text style={{color: themas.colors.primary}}>Crie uma</Text></Text>
+            <Text style={Style.textBottom}>Não tem conta? <Text style={{ color: themas.colors.primary }}>Crie uma</Text></Text>
         </View>
     )
 }
