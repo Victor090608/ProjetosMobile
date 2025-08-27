@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-
 import { Text, View, Image, TextInput, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import { Style } from "./styles";
 import Logo from "../../assets/logo.png";
 import { MaterialIcons } from '@expo/vector-icons';
 import { themas } from '../../global/themes';
+import { Input } from "../../components/input";
 
 
 
@@ -45,7 +45,8 @@ export default function Login() {
             </View>
             <View style={Style.boxMid}>
                 <Text style={Style.titleInput}>ENDEREÇO DE E-MAIL</Text>
-                <View style={Style.boxInput}>
+                <Input />
+                {/* <View style={Style.boxInput}>
                     <TextInput
                         style={Style.input}
                         value={email}
@@ -71,13 +72,13 @@ export default function Login() {
                         size={20}
                         color={themas.colors.gray}
                     />
-                </View>
+                </View> */}
             </View>
             <View style={Style.boxBottom}>
                 <TouchableOpacity style={Style.button} onPress={() => getLogin()}>
                     {
-                        loading ? <ActivityIndicator color={'#ffff'} size={"small"}/> : 
-                        <Text style={Style.textButton}>Entrar</Text>
+                        loading ? <ActivityIndicator color={'#ffff'} size={"small"} /> :
+                            <Text style={Style.textButton}>Entrar</Text>
                     }
                 </TouchableOpacity>
             </View>
