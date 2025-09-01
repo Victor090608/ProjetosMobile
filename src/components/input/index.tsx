@@ -1,19 +1,21 @@
 import React, { forwardRef, Fragment, LegacyRef } from "react";
-import { View, Text, TextInput, TextInputProps } from "react-native";
+import { View, Text, TextInput, TextInputProps, TouchableOpacity } from "react-native";
 import { style } from "./style";
+// import { MaterialIcons } from '@expo/vector-icons';
 import { themas } from "../../global/themes";
 import { FontAwesome, MaterialIcons, Octicons } from '@expo/vector-icons';
 
-// type IconComponent = React.ComponentType<React.ComponentProps<typeof MaterialIcons>>
-// React.ComponentType<React.ComponentProps<typeof FontAwesome>>
-// React.ComponentType<React.ComponentProps<typeof Octicons>>
-type IconComponent =
-  | React.ComponentType<React.ComponentProps<typeof MaterialIcons>>
-  | React.ComponentType<React.ComponentProps<typeof FontAwesome>>
-  | React.ComponentType<React.ComponentProps<typeof Octicons>>;
+// type IconComponent =
+//     | React.ComponentType<React.ComponentProps<typeof MaterialIcons>>
+//     | React.ComponentType<React.ComponentProps<typeof FontAwesome>>
+//     | React.ComponentType<React.ComponentProps<typeof Octicons>>;
+
+type IconComponent = React.ComponentType<React.ComponentProps<typeof MaterialIcons>> |
+    React.ComponentType<React.ComponentProps<typeof FontAwesome>> |
+    React.ComponentType<React.ComponentProps<typeof Octicons>>;
 
 type Props = TextInputProps & {
-    IconLfet?: IconComponent, // Icones Nativos
+    IconLeft?: IconComponent, // Icones Nativos
     IconRight?: IconComponent,
     IconLeftName?: string,
     IconRightName?: string,
@@ -23,16 +25,27 @@ type Props = TextInputProps & {
 }
 
 export const Input = forwardRef((Props: Props, forwardRef: LegacyRef<TextInput> | null) => {
-    const {IconLfet, IconRight, IconLeftName, IconRightName, title, OnIconLeftPress, OnIconRightPress,
+    const { IconLeft, IconRight, IconLeftName, IconRightName, title, OnIconLeftPress, OnIconRightPress,
         ...rest
     } = Props
     return (
         <Fragment>
-        <Text style={style.titleInput}>{title}</Text>
-        <View style={style.boxInput}>
-            <TextInput style={style.input}/>
-            <MaterialIcons name="email" size={20} color={themas.colors.gray}/>
-        </View>
+            <Text style={style.titleInput}>{title}</Text>
+            <View style={style.boxInput}>
+                {
+                    IconLeft && IconLeftName && (
+                        <TouchableOpacity>
+                            <IconLeft name={IconLeftName as any} size={20} color={themas.colors.gray} style={style.Icon} />
+                        </TouchableOpacity>
+                    )
+                }
+                <TextInput style={style.input} />
+                {IconRight && IconRightName && (
+                    <TouchableOpacity>
+                        <IconRight name={IconRightName as any} size={20} color={themas.colors.gray} style={style.Icon} />
+                    </TouchableOpacity>
+                )}
+            </View>
         </Fragment>
     )
 })
