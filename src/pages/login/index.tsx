@@ -44,7 +44,9 @@ export default function Login() {
                 <Text style={Style.text}>Bem vindo de volta!</Text>
             </View>
             <View style={Style.boxMid}>
-                <Input />
+                <Input
+                title="ENDEREÇO E-MAIL"
+                />
                 {/* <View style={Style.boxInput}>
                     <TextInput
                         style={Style.input}

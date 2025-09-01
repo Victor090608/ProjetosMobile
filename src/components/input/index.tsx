@@ -1,4 +1,4 @@
-import React, { forwardRef, Fragment } from "react";
+import React, { forwardRef, Fragment, LegacyRef } from "react";
 import { View, Text, TextInput, TextInputProps } from "react-native";
 import { style } from "./style";
 import { themas } from "../../global/themes";
@@ -22,10 +22,13 @@ type Props = TextInputProps & {
     OnIconRightPress?: () => void,
 }
 
-export const Input = forwardRef(() => {
+export const Input = forwardRef((Props: Props, forwardRef: LegacyRef<TextInput> | null) => {
+    const {IconLfet, IconRight, IconLeftName, IconRightName, title, OnIconLeftPress, OnIconRightPress,
+        ...rest
+    } = Props
     return (
         <Fragment>
-        <Text style={style.titleInput}>ENDEREÇO DE E-MAIL</Text>
+        <Text style={style.titleInput}>{title}</Text>
         <View style={style.boxInput}>
             <TextInput style={style.input}/>
             <MaterialIcons name="email" size={20} color={themas.colors.gray}/>
