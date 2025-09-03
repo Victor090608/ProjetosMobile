@@ -20,12 +20,12 @@ type Props = TextInputProps & {
     IconLeftName?: string,
     IconRightName?: string,
     title?: string,
-    OnIconLeftPress?: () => void, // Ação do Icone
-    OnIconRightPress?: () => void,
+    onIconLeftPress?: () => void, // Ação do Icone
+    onIconRightPress?: () => void,
 }
 
 export const Input = forwardRef<TextInput, Props>((Props, ref: ForwardedRef<TextInput> | null) => {
-    const { IconLeft, IconRight, IconLeftName, IconRightName, title, OnIconLeftPress, OnIconRightPress,
+    const { IconLeft, IconRight, IconLeftName, IconRightName, title, onIconLeftPress, onIconRightPress,
         ...rest
     } = Props
     const calculateSizeWidth = () => {
@@ -38,13 +38,23 @@ export const Input = forwardRef<TextInput, Props>((Props, ref: ForwardedRef<Text
         }
     }
 
+    const calculateSizePaddingLeft = () => {
+        if (IconLeft && IconRight) {
+            return 0;
+        } else if (IconLeft || IconRight) {
+            return 10;
+        } else {
+            return 20;
+        }
+    }
+
     return (
         <Fragment>
             <Text style={style.titleInput}>{title}</Text>
-            <View style={style.boxInput}>
+            <View style={[style.boxInput, {paddingLeft: calculateSizePaddingLeft()}]}>
                 {
                     IconLeft && IconLeftName && (
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={onIconRightPress} style={style.Button}>
                             <IconLeft name={IconLeftName as any} size={20} color={themas.colors.gray} style={style.Icon} />
                         </TouchableOpacity>
                     )
@@ -56,7 +66,7 @@ export const Input = forwardRef<TextInput, Props>((Props, ref: ForwardedRef<Text
                 {...rest}
                 />
                 {IconRight && IconRightName && (
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={onIconLeftPress} style={style.Button}>
                         <IconRight name={IconRightName as any} size={20} color={themas.colors.gray} style={style.Icon} />
                     </TouchableOpacity>
                 )}
