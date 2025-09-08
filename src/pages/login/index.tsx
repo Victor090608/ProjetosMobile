@@ -6,6 +6,7 @@ import Logo from "../../assets/logo.png";
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
 import { themas } from '../../global/themes';
 import { Input } from "../../components/input";
+import { Button } from "../../components/button";
 
 
 
@@ -61,41 +62,9 @@ export default function Login() {
                 secureTextEntry={showPassword}
                 onIconRightPress={() => setShowPassword(!showPassword)}
                 />
-                {/* <View style={Style.boxInput}>
-                    <TextInput
-                        style={Style.input}
-                        value={email}
-                        onChangeText={setEmail}
-                    />
-                    <MaterialIcons
-                        name="email"
-                        size={20}
-                        color={themas.colors.gray}
-
-                    />
-                </View>
-                <Text style={Style.titleInput}>SENHA</Text>
-                <View style={Style.boxInput}>
-                    <TextInput
-                        style={Style.input}
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry
-                    />
-                    <MaterialIcons
-                        name="remove-red-eye"
-                        size={20}
-                        color={themas.colors.gray}
-                    />
-                </View> */}
             </View>
             <View style={Style.boxBottom}>
-                <TouchableOpacity style={Style.button} onPress={() => getLogin()}>
-                    {
-                        loading ? <ActivityIndicator color={'#ffff'} size={"small"} /> :
-                            <Text style={Style.textButton}>Entrar</Text>
-                    }
-                </TouchableOpacity>
+                <Button text = "Entrar" loading = {loading} onPress = {() => getLogin}/>
             </View>
             <Text style={Style.textBottom}>Não tem conta? <Text style={{ color: themas.colors.primary }}>Crie uma</Text></Text>
         </View>

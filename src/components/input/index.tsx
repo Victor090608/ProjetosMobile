@@ -50,7 +50,7 @@ export const Input = forwardRef<TextInput, Props>((Props, ref: ForwardedRef<Text
 
     return (
         <Fragment>
-            <Text style={style.titleInput}>{title}</Text>
+            {title && <Text style={style.titleInput}>{title}</Text>}
             <View style={[style.boxInput, {paddingLeft: calculateSizePaddingLeft()}]}>
                 {
                     IconLeft && IconLeftName && (
