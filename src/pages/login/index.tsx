@@ -7,10 +7,12 @@ import { MaterialIcons, Octicons } from '@expo/vector-icons';
 import { themas } from '../../global/themes';
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
-
-
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 
 export default function Login() {
+
+    const navigation = useNavigation<NavigationProp<any>>();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(true);
@@ -22,6 +24,11 @@ export default function Login() {
             if (!email || !password) {
                 return Alert.alert('Atenção', 'Informe os campos obrigatórios!');
             }
+
+            navigation.navigate("BottomRoutes")
+
+            console.log("Funcionou!");
+
             setTimeout(() => {
                 if (email == 'vvbarcellos11@gmail.com' && password == '12345678') {
                     Alert.alert('Logado com sucesso!');
@@ -32,6 +39,8 @@ export default function Login() {
             }, 3000)
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -47,24 +56,24 @@ export default function Login() {
             </View>
             <View style={Style.boxMid}>
                 <Input
-                value={email}
-                onChangeText={setEmail}
-                title="ENDEREÇO E-MAIL"
-                IconRight={MaterialIcons}
-                IconRightName="email"
+                    value={email}
+                    onChangeText={setEmail}
+                    title="ENDEREÇO E-MAIL"
+                    IconRight={MaterialIcons}
+                    IconRightName="email"
                 />
                 <Input
-                value={password}
-                onChangeText={setPassword}
-                title="SENHA"
-                IconRight={Octicons}
-                IconRightName={showPassword ? "eye-closed" : "eye"} // Logica do olho aberto ao ver a senha
-                secureTextEntry={showPassword}
-                onIconRightPress={() => setShowPassword(!showPassword)}
+                    value={password}
+                    onChangeText={setPassword}
+                    title="SENHA"
+                    IconRight={Octicons}
+                    IconRightName={showPassword ? "eye-closed" : "eye"} // Logica do olho aberto ao ver a senha
+                    secureTextEntry={showPassword}
+                    onIconRightPress={() => setShowPassword(!showPassword)}
                 />
             </View>
             <View style={Style.boxBottom}>
-                <Button text = "Entrar" loading = {loading} onPress = {() => getLogin}/>
+                <Button text="Entrar" loading={loading} onPress={() => getLogin()} />
             </View>
             <Text style={Style.textBottom}>Não tem conta? <Text style={{ color: themas.colors.primary }}>Crie uma</Text></Text>
         </View>
