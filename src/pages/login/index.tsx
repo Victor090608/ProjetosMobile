@@ -29,14 +29,14 @@ export default function Login() {
 
             console.log("Funcionou!");
 
-            setTimeout(() => {
-                if (email == 'vvbarcellos11@gmail.com' && password == '12345678') {
-                    Alert.alert('Logado com sucesso!');
-                } else {
-                    Alert.alert('Usuário não encontrado.');
-                }
-                setLoading(false)
-            }, 3000)
+            // setTimeout(() => {
+            //     if (email == 'vvbarcellos11@gmail.com' && password == '12345678') {
+            //         Alert.alert('Logado com sucesso!');
+            //     } else {
+            //         Alert.alert('Usuário não encontrado.');
+            //     }
+            //     setLoading(false)
+            // }, 3000)
         } catch (error) {
             console.log(error);
         } finally {
