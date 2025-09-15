@@ -1,19 +1,31 @@
 import React from "react";
-import { Text, Touchable, TouchableOpacity } from "react-native";
+import { Text, Touchable, TouchableOpacity, View } from "react-native";
 import { style } from "./styles";
+import { AntDesign, Entypo, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 export default ({ state, navigation }: any) => {
     return (
-        <Text>
-            <TouchableOpacity>
-                <Text>Esquerda</Text>
+        <View style={style.tabArea}>
+            <TouchableOpacity style={style.tabItem}>
+                <AntDesign
+                    name="bars"
+                    style={{ fontSize: 32 }}
+                />
             </TouchableOpacity>
-            <TouchableOpacity>
-                <Text>Centro</Text>
+            <TouchableOpacity style={style.tabItemButton}>
+                <View>
+                    <Entypo
+                        name="plus"
+                        size={40}
+                    />
+                </View>
             </TouchableOpacity>
-            <TouchableOpacity>
-                <Text>Direita</Text>
+            <TouchableOpacity style={style.tabItem}>
+                <FontAwesome
+                    name="user"
+                    style={{ fontSize: 32 }}
+                />
             </TouchableOpacity>
-        </Text>
+        </View>
     )
 }
