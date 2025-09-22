@@ -15,12 +15,34 @@ export const style = StyleSheet.create({
         justifyContent: 'center'
     },
     greeting: {
-        fontSize: 20,
+        fontSize: 20, 
         color: '#FFF',
         marginTop: 20
     },
     boxInput: {
         width: '80%'
+    },
+
+    boxList: {
+        flex: 1,
+        width: '100%',
+        // backgroundColor: 'red'
+    },
+    card: {
+        width: '100%',
+        height: 60,
+        backgroundColor: '#FFF',
+        marginTop: 6,
+        borderRadius: 10,
+        justifyContent: 'center',
+        padding: 10,
+        borderWidth: 1,
+        borderColor: themas.colors.lightGray
+    },
+    rowCard: {
+        flexDirection: 'row',
+        alignItems: 'center', 
+        justifyContent: 'space-between'
     }
 
 })
