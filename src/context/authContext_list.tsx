@@ -5,6 +5,7 @@ import { Modalize } from "react-native-modalize";
 import { Input } from "../components/input";
 import { themas } from "../global/themes";
 import { Flag } from "../components/Flag";
+import CustomDateTimePicker from "../components/CustomDateTimePicker";
 
 export const AuthContextList: any = createContext({});
 
@@ -21,6 +22,8 @@ export const AuthProviderList = (props: any): any => {
     const [selectedFlag, setSelection] = useState('Urgente');
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedTime, setSelectedTime] = useState(new Date());
+    const [showDatePicker, setShowDatePicker] = useState(false);
+    const [showTimePicker, setShowTimePicker] = useState(false);
 
     const onOpen = () => {
         modalizeRef?.current?.open();
@@ -45,6 +48,12 @@ export const AuthProviderList = (props: any): any => {
                 </TouchableOpacity>
             ))
         )
+    }
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+    }
+    const handleTimeChange = (date) => {
+        setSelectedDate(date);
     }
 
     const _container = () => {
@@ -83,13 +92,24 @@ export const AuthProviderList = (props: any): any => {
                         numberOfLines={5}
                         value={description}
                         onChangeText={setDescription}
-                        
                     />
                 </View>
                 <View style={{ width: '40%' }}>
-                    <Input
+                    {/* <Input
                         title="Tempo limite:"
                         labelStyle={styles.label}
+                    /> */}
+                    <CustomDateTimePicker
+                        onDateChange={handleDateChange}
+                        setShow={setShowDatePicker}
+                        show={showDatePicker}
+                        type={'date'}
+                    />
+                    <CustomDateTimePicker
+                        onDateChange={handleTimeChange}
+                        setShow={setShowTimePicker}
+                        show={showTimePicker}
+                        type={'date'}
                     />
                 </View>
                 <View style={styles.containerFlag}>
