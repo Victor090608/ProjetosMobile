@@ -1,10 +1,10 @@
-interface AuthContextType {
+export interface AuthContextType {
     taskList: Array<PropCard>,
     onOpen: void,
 
 }
 
-type PropCard = {
+export type PropCard = {
     description: string,
     flag: PropFlags,
     item: number,
@@ -13,4 +13,4 @@ type PropCard = {
     title: string,
 }
 
-type PropFlags = 'Urgente' | 'Opcional'
+export type PropFlags = 'Urgente' | 'Opcional'
