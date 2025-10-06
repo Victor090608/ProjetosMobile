@@ -87,8 +87,8 @@ export const AuthProviderList = (props: any): any => {
             await AsyncStorage.setItem('taskList', JSON.stringify(taskList))
 
             setTaskList(taskList),
-                // setData(),
-                onClose
+                setData()
+                onClose()
 
         } catch (error) {
             console.log("Erro ao salvar o item", error)
@@ -106,11 +106,25 @@ export const AuthProviderList = (props: any): any => {
 
     async function get_taskList() {
         try{
-            const storageData = await AsyncStorage.getItem('tasklist')
+            const storageData = await AsyncStorage.getItem('taskList')
             const taskList = storageData ? JSON.parse(storageData) : []
             setTaskList(taskList)
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    const handleDelete = async (itemToDelete) => {
+        try {
+            const StorageData = await AsyncStorage.getItem('taskList')
+            const taskList : Array<any> = StorageData ? JSON.parse(StorageData) : []
+
+            const updatedTaskList = taskList.filter(item => item.item !== itemToDelete.item)
+
+            await AsyncStorage.setItem('taskList', JSON.stringify(updatedTaskList))
+            setTaskList(updatedTaskList)
+        } catch (error) {
+            console.log("Erro ao Excluir o item", error)
         }
     }
 
@@ -201,12 +215,13 @@ export const AuthProviderList = (props: any): any => {
         )
     }
     return (
-        <AuthContextList.Provider value={{ onOpen, taskList }}>
+        <AuthContextList.Provider value={{ onOpen, taskList, handleDelete }}>
             {props.children}
             <Modalize
                 ref={modalizeRef}
                 // modalHeight={Dimensions.get('window').height / 1.3}
                 childrenStyle={{ height: Dimensions.get('window').height / 1.3 }}
+                adjustToContentHeight={true}
             >
                 {_container()}
             </Modalize>
