@@ -1,7 +1,6 @@
 export interface AuthContextType {
     taskList: Array<PropCard>,
     onOpen: void,
-
 }
 
 export type PropCard = {
@@ -9,7 +8,6 @@ export type PropCard = {
     flag: PropFlags,
     item: number,
     timeLimit: string,
-    titleString: string,
     title: string,
 }
 
