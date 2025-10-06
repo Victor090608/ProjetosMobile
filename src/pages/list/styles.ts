@@ -59,7 +59,7 @@ export const style = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: 'red',
+        backgroundColor: themas.colors.red,
         justifyContent: 'center',
         alignItems: 'center',
         width: 100,

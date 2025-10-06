@@ -26,6 +26,17 @@ export default function List() {
             </View>
         )
     }
+    const renderLeftActions = () => {
+        return (
+            <View style={[style.button, {backgroundColor: themas.colors.blueLight}]}>
+                <AntDesign
+                    name="edit"
+                    size={20}
+                    color={'#fff'}
+                />
+            </View>
+        )
+    }
 
     const _renderCard = (item: PropCard, index) => {
         const color = item.flag == 'Opcional' ? themas.colors.blueLight : themas.colors.red
@@ -34,6 +45,7 @@ export default function List() {
                 ref={(ref) => swipeableRefs.current[index] = ref}
                 key={index}
                 renderRightActions={renderRightActions}
+                renderLeftActions={renderLeftActions}
             >
                 <View style={style.card}>
                     <View style={style.rowCard}>
