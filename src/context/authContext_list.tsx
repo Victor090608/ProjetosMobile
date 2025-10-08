@@ -27,7 +27,8 @@ export const AuthProviderList = (props: any): any => {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimePicker, setShowTimePicker] = useState(false);
     const [item, setItem] = useState(0);
-    const [taskList, setTaskList] = useState([]);
+    const [taskList, setTaskList] = useState<Array<PropCard>>([]);
+    const [taskListBackup, setTaskListBackup] = useState([]);
 
     const onOpen = () => {
         modalizeRef?.current?.open();
@@ -69,7 +70,7 @@ export const AuthProviderList = (props: any): any => {
         }
         try {
             const newItem = {
-                item: item !==0 ? item: Date.now(),
+                item: item !== 0 ? item : Date.now(),
                 title,
                 description,
                 flag: selectedFlag,
@@ -96,8 +97,9 @@ export const AuthProviderList = (props: any): any => {
             await AsyncStorage.setItem('taskList', JSON.stringify(taskList))
 
             setTaskList(taskList),
-                setData()
-                onClose()
+                setTaskListBackup(taskList)
+            setData()
+            onClose()
 
         } catch (error) {
             console.log("Erro ao salvar o item", error)
@@ -106,18 +108,19 @@ export const AuthProviderList = (props: any): any => {
     }
     const setData = () => {
         setTitle(''),
-        setDescription(''),
-        setSelectedFlag('Urgente'),
-        setItem(0)
+            setDescription(''),
+            setSelectedFlag('Urgente'),
+            setItem(0)
         setSelectedDate(new Date())
         setSelectedTime(new Date())
     }
 
     async function get_taskList() {
-        try{
+        try {
             const storageData = await AsyncStorage.getItem('taskList')
             const taskList = storageData ? JSON.parse(storageData) : []
             setTaskList(taskList)
+            setTaskListBackup(taskList)
         } catch (error) {
             console.log(error)
         }
@@ -126,22 +129,23 @@ export const AuthProviderList = (props: any): any => {
     const handleDelete = async (itemToDelete) => {
         try {
             const StorageData = await AsyncStorage.getItem('taskList')
-            const taskList : Array<any> = StorageData ? JSON.parse(StorageData) : []
+            const taskList: Array<any> = StorageData ? JSON.parse(StorageData) : []
 
             const updatedTaskList = taskList.filter(item => item.item !== itemToDelete.item)
 
             await AsyncStorage.setItem('taskList', JSON.stringify(updatedTaskList))
             setTaskList(updatedTaskList)
+            setTaskListBackup(taskList)
         } catch (error) {
             console.log("Erro ao Excluir o item", error)
         }
     }
 
-    const handleEdit = async(itemToEdit: PropCard) => {
+    const handleEdit = async (itemToEdit: PropCard) => {
         try {
             setTitle(itemToEdit.title)
             setDescription(itemToEdit.description)
-            setItem (itemToEdit.item)
+            setItem(itemToEdit.item)
             setSelectedFlag(itemToEdit.flag)
 
             const timeLimit = new Date(itemToEdit.timeLimit)
@@ -151,6 +155,29 @@ export const AuthProviderList = (props: any): any => {
             onOpen()
         } catch (error) {
             console.log('Erro ao editar')
+        }
+    }
+
+    const filter = (t: string) => {
+        const array = taskListBackup
+        const campos = ['title', 'description']
+
+        if (t) {
+            // Limpar espaços e letra maiúscula ignorada na hora de procurar
+            const searchTerm = t.trim().toLowerCase()
+            const FilteredArray = array.filter((item => {
+                for (let i = 0; i < campos.length ; i++) {
+                    // Ele busca como é digitado e acha ignorando uppercase e espaços,
+                    // Busca exatamente como está
+                    if (item[campos[i]].trim().toLowerCase().includes(searchTerm))
+                        return true
+                }
+            }
+        ))
+
+            setTaskList(FilteredArray)
+        } else {
+            setTaskList(array)
         }
     }
 
@@ -241,7 +268,7 @@ export const AuthProviderList = (props: any): any => {
         )
     }
     return (
-        <AuthContextList.Provider value={{ onOpen, taskList, handleDelete, handleEdit }}>
+        <AuthContextList.Provider value={{ onOpen, taskList, handleDelete, handleEdit, filter }}>
             {props.children}
             <Modalize
                 ref={modalizeRef}
