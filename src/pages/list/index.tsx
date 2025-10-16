@@ -76,8 +76,7 @@ export default function List() {
     return (
         <View style={style.container}>
             <View style={style.header}>
-                <Text style={style.greeting}>Bom dia,
-                    <Text style={{ fontWeight: 'bold' }}> Victor Vieira Barcellos</Text></Text>
+                <Text style={style.greeting}>Bom dia, USUÁRIO</Text>
                 <View style={style.boxInput}>
                     <Input
                         IconLeft={MaterialIcons}

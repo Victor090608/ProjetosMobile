@@ -1,11 +1,11 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { themas } from "../global/themes";
+import { themas } from "../../global/themes";
 
-export const style = StyleSheet.create ({
+export const style = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'space-between',
         alignItems: 'center',
+        justifyContent: 'center', // remover para adicionar ao topo
         paddingVertical: 40,
         paddingHorizontal: 20,
         backgroundColor: '#f8f8f8'
@@ -14,11 +14,33 @@ export const style = StyleSheet.create ({
         fontSize: 24,
         fontWeight: 'bold',
         marginTop: 20,
-        color: '#333',
+        color: themas.colors.gray,
     },
     logoutButton: {
-        position: 'absolute',
-        bottom: 20,
-        right: 20
+        marginTop: 40,
+        width: 250,
+        height: 50,
+        flexDirection: 'row',
+        backgroundColor: themas.colors.red,
+        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 40,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 3,
+
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
+        gap: 5,
+
+    },
+    logoutButtonText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#fff'
     }
 })

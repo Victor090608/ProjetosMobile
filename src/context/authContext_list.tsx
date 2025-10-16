@@ -35,6 +35,7 @@ export const AuthProviderList = (props: any): any => {
     }
     const onClose = () => {
         modalizeRef?.current?.close();
+        setData(); // limpa os campos ao fechar o modal
     }
 
     useEffect(() => {
@@ -80,7 +81,7 @@ export const AuthProviderList = (props: any): any => {
                     selectedDate.getDate(),
                     selectedTime.getHours(),
                     selectedTime.getMinutes()
-                ).toISOString(),
+                )
             }
             const storageData = await AsyncStorage.getItem('taskList')
             // console.log(storageData)
@@ -272,6 +273,7 @@ export const AuthProviderList = (props: any): any => {
             {props.children}
             <Modalize
                 ref={modalizeRef}
+                onClosed={setData}
                 // modalHeight={Dimensions.get('window').height / 1.3}
                 childrenStyle={{ height: Dimensions.get('window').height / 1.3 }}
                 adjustToContentHeight={true}
@@ -286,7 +288,7 @@ export const useAuth = () => useContext(AuthContextList);
 
 export const styles = StyleSheet.create({
     container: {
-        width: '100%'
+        width: '100%',
     },
     header: {
         width: '100%',
@@ -303,7 +305,7 @@ export const styles = StyleSheet.create({
     },
     content: {
         width: '100%',
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
     },
     label: {
         fontWeight: 'bold',
@@ -311,7 +313,7 @@ export const styles = StyleSheet.create({
     },
     containerFlag: {
         width: '100%',
-        padding: 10
+        padding: 10,
     },
     rowFlags: {
         flexDirection: 'row',

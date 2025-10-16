@@ -12,7 +12,7 @@ export default function Routes() {
             screenOptions={{
                 headerShown: false,
                 cardStyle: {
-                    backgroundColor: "#FFF"
+                    backgroundColor: "#FFF",
                 }
             }}
         >

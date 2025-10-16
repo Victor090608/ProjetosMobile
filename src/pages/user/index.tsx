@@ -15,13 +15,21 @@ export default function User() {
     };
     return (
         <View style={style.container}>
-            <Text style={style.name}>NOME DO USUÁRIO</Text>
+            <Ionicons
+                name="person-circle"
+                size={160}
+                color={themas.colors.gray}
+            />
+            <Text style={style.name}>
+                USUÁRIO
+            </Text>
             <TouchableOpacity style={style.logoutButton} onPress={handleLogout}>
                 <Ionicons
                     name="exit"
-                    color={themas.colors.gray}
-                    size={40}
+                    color={'#fff'}
+                    size={30}
                 />
+                <Text style={style.logoutButtonText}>Sair</Text>
             </TouchableOpacity>
         </View>
     )
